@@ -1,0 +1,526 @@
+/* ========================== VARIÁVEIS GLOBAIS ========================== */
+:root {
+  --primary: #fef4de;
+  --brown: #5c2c24;
+  --orange: #ff6e1d;
+  --white: #ffffff;
+  --font-header: "Poppins", sans-serif;
+  --font-body: "Roboto", sans-serif;
+  --font-size-small: 1rem;
+  --font-size-medium: 1.2rem;
+  --font-size-large: 4rem;
+  --header-height: 72px;
+}
+
+/* ========================== RESET ========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: var(--brown);
+  font-family: var(--font-body);
+}
+
+main {
+  padding-top: calc(var(--header-height) + 1rem);
+}
+
+/* ==========================
+   HEADER E NAVBAR (mobile style para web)
+   ========================== */
+.header {
+  background: var(--primary);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2.5rem;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-family: var(--font-header);
+  font-weight: 600;
+  color: var(--brown);
+}
+
+.logo a {
+  text-decoration: none;
+  color: var(--orange);
+}
+
+.logo a span {
+  color: var(--brown);
+}
+
+/* BARRA HAMBURGUER */
+.bars {
+  cursor: pointer;
+  display: block;
+}
+
+.bars { z-index: 1001; }
+
+.bar {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: var(--orange);
+  margin: 5px auto;
+  border-radius: 3px;
+}
+
+/* NAVIGATION VERTICAL (igual mobile) */
+.navigation {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--primary);
+  display: none; /* só aparece ao clicar */
+  flex-direction: column;
+  padding: 2rem 0;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+.navigation.active {
+  display: flex;
+}
+
+/* mobile: animação suave e overflow para menus maiores */
+.navigation {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.28s ease;
+}
+.navigation.active {
+  max-height: 420px; /* suficiente para menu curto; ajusta conforme necessário */
+}
+
+.navigation ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navigation ul li a {
+  text-decoration: none;
+  font-family: var(--font-header);
+  font-weight: 500;
+  color: var(--brown);
+  font-size: 1.1rem;
+}
+
+.navigation ul li a:hover {
+  color: var(--orange);
+}
+
+/* REMOVER ESTILOS DE DESKTOP QUE MUDAVAM O MENU */
+@media (min-width: 768px) {
+  /* Desktop: esconder o ícone de hambúrguer e mostrar o menu inline */
+  .bars {
+    display: none; /* ajuste para 'block' se quiser manter o botão visível */
+  }
+
+  .navigation {
+    position: static;
+    top: auto;
+    left: auto;
+    width: auto;
+    background: transparent;
+    display: flex !important;
+    flex-direction: row;
+    padding: 0;
+    box-shadow: none;
+    align-items: center;
+    gap: 1rem;
+    max-height: none; /* garantir visibilidade no desktop */
+    overflow: visible;
+  }
+
+  /* aumentar legibilidade do menu no desktop */
+  .navigation ul li a {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .navigation ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+  }
+
+  .navigation ul li a {
+    color: var(--brown);
+    font-size: 1rem;
+  }
+}
+
+/* ========================== NAV MOBILE TWEAKS ========================== */
+@media (max-width: 767px) {
+  .header {
+    padding: 0.5rem 1rem;
+    height: var(--header-height);
+  }
+
+  .logo {
+    font-size: 1.05rem;
+  }
+
+  .navigation {
+    padding: 0.25rem 0;
+    background: var(--primary);
+  }
+
+  .navigation ul {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .navigation ul li a {
+    display: block;
+    width: 100%;
+    padding: 0.9rem 1.25rem;
+    text-align: left;
+    font-size: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    box-sizing: border-box;
+  }
+
+  .navigation ul li:first-child a {
+    border-top: none;
+  }
+
+  /* garantir que o botão de menu fique visível e clicável */
+  .bars {
+    display: block;
+  }
+}
+
+ /* ========================== BANNER ========================== */
+.banner {
+  background: var(--primary);
+  margin-top: 100px;
+  padding: 4rem 0;
+}
+.banner-content {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+}
+.banner-title {
+  font-size: var(--font-size-large);
+  font-family: var(--font-header);
+  color: var(--brown);
+  text-transform: uppercase;
+}
+.banner-subtitle {
+  font-family: var(--font-header);
+  color: var(--brown);
+}
+.banner-description {
+  margin: 1.5rem 0;
+  color: var(--brown);
+}
+.banner-button {
+  background: var(--orange);
+  color: var(--white);
+  padding: 0.7rem 2rem;
+  border-radius: 2rem;
+  text-decoration: none;
+}
+
+/* ========================== BURGER SECTION ========================== */
+.burger-section {
+  padding: 3rem 0;
+}
+.burger-section-title {
+  text-align: center;
+  color: var(--white);
+  font-family: var(--font-header);
+  margin-bottom: 2rem;
+}
+.burger-grid {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 3rem 0;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--orange) transparent;
+  scrollbar-width: thin;
+}
+.burger-block {
+  flex: 0 0 220px;
+  min-width: 150px;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s;
+  scroll-snap-align: start;
+}
+.burger-block:hover {
+  transform: scale(1.05);
+}
+.burger-block img {
+  width: 100%;
+  display: block;
+}
+
+/* Scrollbar styling for WebKit */
+.burger-grid::-webkit-scrollbar {
+  height: 90px;
+}
+.burger-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.burger-grid::-webkit-scrollbar-thumb {
+  background: var(--orange);
+  border-radius: 10px;
+}
+
+/* Centralizar e estilizar o botão Learn More */
+.card-button {
+  display: block;
+  margin: 1.5rem auto;
+  background: var(--orange);
+  color: var(--white);
+  padding: 0.8rem 1.6rem;
+  border-radius: 1.5rem;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-header);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+.card-button:hover {
+  filter: brightness(0.95);
+}
+
+/* ========================== MAIS PEDIDOS ========================== */
+.description {
+  background: #f1de9c;
+  padding: 3rem 0;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.description-content {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Grid para "Mais Pedidos" em telas maiores */
+@media (min-width: 768px) {
+  .description-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 80%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .description-content {
+    grid-template-columns: repeat(4, 1fr);
+    width: 75%;
+  }
+}
+.description-card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+.burger-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.stars {
+  margin-top: 1rem;
+  color: gold;
+}
+
+/* ========================== CONTATO ========================== */
+.contact {
+  background: var(--primary);
+  padding: 3rem 0;
+}
+.contact-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: var(--font-header);
+  color: var(--brown);
+}
+.contact-content {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid #ccc;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+.contact-form button {
+  background: var(--brown);
+  color: var(--white);
+  padding: 0.8rem 2rem;
+  border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+}
+.contact-form button:hover {
+  background: #3e1c16;
+}
+
+.contact-img{
+  display: flex; /* centraliza a imagem dentro do container */
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-img img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (min-width: 968px) {
+  /* Centralizar e reduzir largura da seção de contato no desktop */
+  .contact-content {
+    width: 60%;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+
+/* ========================== BANNER - ajustes para desktop ========================== */
+@media (min-width: 768px) {
+  .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 90%;
+    margin: 2.5rem auto; /* manter espaçamento abaixo do header */
+    text-align: left;
+  }
+
+  .banner-text {
+    width: 50%;
+  }
+
+
+  .banner-img img {
+    width: 80%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .banner-title {
+    font-size: 4.5rem;
+  }
+
+  .banner-description {
+    font-size: 1.1rem;
+  }
+}
+
+/* ========================== RESPONSIVE ADJUSTMENTS (mobile-first tweaks) ========================== */
+.banner-title {
+  font-size: clamp(2rem, 8vw, var(--font-size-large));
+}
+.banner-description {
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+}
+.banner-content {
+  width: 95%;
+}
+.header {
+  padding: 1rem 1rem;
+}
+.banner {
+  margin-top: 88px; /* ajuste leve para header fixo */
+  padding: 2rem 0;
+}
+.burger-grid {
+  gap: 0.75rem;
+  padding: 2rem 0;
+}
+.burger-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.burger-block {
+  flex: 0 0 180px;
+  min-width: 130px;
+}
+.burger-block img {
+  height: auto;
+  object-fit: cover;
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.8rem 1rem;
+  }
+  .logo {
+    font-size: 1.1rem;
+  }
+  .banner-title {
+    font-size: 2.2rem;
+  }
+  .banner-subtitle {
+    font-size: 1rem;
+  }
+  .banner-img {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .banner-img img {
+    width: 90%;
+    max-width: 320px;
+  }
+  .navigation ul li a {
+    font-size: 1rem;
+    padding: 0.25rem 0;
+  }
+  .description-content,
+  .contact-content {
+    width: 95%;
+  }
+  .card-button {
+    padding: 0.6rem 1.2rem;
+  }
+}
+
